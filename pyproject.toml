@@ -29,8 +29,6 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.0.0",
-    "pytest-cov>=4.0.0",
     "flake8>=6.0.0",
     "black>=23.0.0",
     "isort>=5.12.0",
@@ -74,20 +72,4 @@ exclude = [
     "*.egg-info",
 ]
 
-[tool.coverage.run]
-source = ["db"]
-omit = [
-    "*/tests/*",
-    "*/test_*",
-    "*/__pycache__/*",
-]
-
-[tool.coverage.report]
-exclude_lines = [
-    "pragma: no cover",
-    "def __repr__",
-    "raise AssertionError",
-    "raise NotImplementedError",
-    "if __name__ == .__main__.:",
-    "if TYPE_CHECKING:",
-] 
+ 

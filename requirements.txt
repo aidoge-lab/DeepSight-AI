@@ -4,9 +4,7 @@
 # - os, argparse, glob, pathlib (built-in)
 # - logging, re, typing (built-in)
 
-# Development and testing dependencies
-pytest>=7.0.0
-pytest-cov>=4.0.0
+# Development and code quality dependencies
 flake8>=6.0.0
 black>=23.0.0
 isort>=5.12.0
