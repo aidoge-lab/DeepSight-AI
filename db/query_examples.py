@@ -215,8 +215,8 @@ def main():
     parser.add_argument(
         '--db-path',
         type=str,
-        default='ai_insights.db',
-        help='Path to the SQLite database file (default: ai_insights.db)'
+        default='./db/ai_insights.db',
+        help='Path to the SQLite database file (default: ./db/ai_insights.db)'
     )
     
     args = parser.parse_args()
