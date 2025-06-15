@@ -1,0 +1,208 @@
+<!-- Statistics Grid Component -->
+<div class="stats-grid" role="region" aria-label="{{stats_title | default: 'Key Statistics'}}">
+  {{#if stats_title}}
+  <div class="stats-header mb-lg">
+    <h2 class="text-xl font-semibold">{{stats_title}}</h2>
+    {{#if stats_subtitle}}
+    <p class="text-muted mt-sm">{{stats_subtitle}}</p>
+    {{/if}}
+  </div>
+  {{/if}}
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-{{grid_cols | default: '4'}} gap-md">
+    {{#each stats}}
+    <div class="stat-card card {{#if highlight}}highlight{{/if}}" 
+         data-stat-id="{{id}}"
+         {{#if tooltip}}title="{{tooltip}}"{{/if}}>
+      <div class="card-body">
+        <!-- Stat Icon -->
+        {{#if icon}}
+        <div class="stat-icon mb-sm">
+          {{#if icon.svg}}
+          {{{icon.svg}}}
+          {{else}}
+          <div class="stat-icon-placeholder bg-accent-light rounded-full w-8 h-8 flex items-center justify-center">
+            <span class="text-accent font-semibold text-sm">{{icon.text | default: (substring label 0 1)}}</span>
+          </div>
+          {{/if}}
+        </div>
+        {{/if}}
+        
+        <!-- Stat Value -->
+        <div class="stat-value">
+          {{#if loading}}
+          <div class="loading-placeholder h-8 bg-secondary rounded mb-sm animate-pulse"></div>
+          {{else if error}}
+          <span class="text-danger">--</span>
+          {{else}}
+          <span class="text-2xl font-bold {{value_class | default: 'text-primary'}}">
+            {{#if prefix}}{{prefix}}{{/if}}{{format_number value format}}{{#if suffix}}{{suffix}}{{/if}}
+          </span>
+          {{/if}}
+        </div>
+        
+        <!-- Stat Label -->
+        <div class="stat-label">
+          <p class="text-sm text-muted font-medium">{{label}}</p>
+        </div>
+        
+        <!-- Stat Change/Trend -->
+        {{#if change}}
+        <div class="stat-change mt-sm flex items-center">
+          {{#if change.positive}}
+          <svg class="w-4 h-4 text-success mr-xs" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 4L4 8L12 8L8 4Z" fill="currentColor"/>
+          </svg>
+          <span class="text-success text-xs font-medium">
+            +{{format_number change.value change.format}}{{#if change.suffix}}{{change.suffix}}{{/if}}
+          </span>
+          {{else if change.negative}}
+          <svg class="w-4 h-4 text-danger mr-xs" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 12L4 8L12 8L8 12Z" fill="currentColor"/>
+          </svg>
+          <span class="text-danger text-xs font-medium">
+            {{format_number change.value change.format}}{{#if change.suffix}}{{change.suffix}}{{/if}}
+          </span>
+          {{else}}
+          <svg class="w-4 h-4 text-muted mr-xs" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 8L12 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span class="text-muted text-xs font-medium">
+            {{format_number change.value change.format}}{{#if change.suffix}}{{change.suffix}}{{/if}}
+          </span>
+          {{/if}}
+          {{#if change.period}}
+          <span class="text-muted text-xs ml-xs">{{change.period}}</span>
+          {{/if}}
+        </div>
+        {{/if}}
+        
+        <!-- Stat Sparkline/Mini Chart -->
+        {{#if sparkline}}
+        <div class="stat-sparkline mt-sm">
+          <div class="sparkline-container h-8" data-sparkline="{{json sparkline}}">
+            <!-- Sparkline will be rendered here by JavaScript -->
+          </div>
+        </div>
+        {{/if}}
+        
+        <!-- Stat Progress Bar -->
+        {{#if progress}}
+        <div class="stat-progress mt-sm">
+          <div class="flex justify-between items-center mb-xs">
+            {{#if progress.label}}
+            <span class="text-xs text-muted">{{progress.label}}</span>
+            {{/if}}
+            {{#if progress.target}}
+            <span class="text-xs text-muted">{{format_number progress.current}}/{{format_number progress.target}}</span>
+            {{/if}}
+          </div>
+          <div class="progress">
+            <div 
+              class="progress-bar {{progress.color | default: 'bg-accent'}}" 
+              style="width: {{progress.percentage}}%"
+              role="progressbar"
+              aria-valuenow="{{progress.percentage}}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-label="{{progress.label}} progress: {{progress.percentage}}%"
+            ></div>
+          </div>
+        </div>
+        {{/if}}
+        
+        <!-- Stat Link -->
+        {{#if link}}
+        <div class="stat-link mt-sm">
+          <a href="{{link.url}}" class="text-xs text-accent hover:text-accent-dark transition-colors">
+            {{link.text | default: 'View details'}} →
+          </a>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  
+  <!-- Stats Footer -->
+  {{#if stats_footer}}
+  <div class="stats-footer mt-lg">
+    {{#if last_updated}}
+    <p class="text-xs text-muted text-center">
+      Last updated: {{format_date last_updated}}
+    </p>
+    {{/if}}
+    
+    {{#if data_source}}
+    <p class="text-xs text-muted text-center mt-xs">
+      Source: {{data_source}}
+    </p>
+    {{/if}}
+    
+    {{#if refresh_interval}}
+    <div class="auto-refresh-indicator flex items-center justify-center mt-sm">
+      <div class="w-2 h-2 bg-accent rounded-full animate-pulse mr-xs"></div>
+      <span class="text-xs text-muted">Auto-refreshes every {{refresh_interval}}</span>
+    </div>
+    {{/if}}
+  </div>
+  {{/if}}
+</div>
+
+<!-- Note: Additional styles for stats-grid component should be added to components.css -->
+
+<!-- Example Usage -->
+<!-- 
+{{> stats-grid
+  stats_title="AI Model Performance"
+  stats_subtitle="Key metrics from the latest evaluation"
+  grid_cols=4
+  stats=[
+    {
+      id: "accuracy",
+      label: "Average Accuracy",
+      value: 92.5,
+      format: "percentage",
+      suffix: "%",
+      icon: { text: "A" },
+      change: { positive: true, value: 2.1, suffix: "%", period: "vs last month" },
+      link: { url: "/accuracy-details", text: "View breakdown" }
+    },
+    {
+      id: "models",
+      label: "Active Models",
+      value: 1247,
+      format: "number",
+      icon: { 
+        svg: '<svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="currentColor">...</svg>'
+      },
+      sparkline: [45, 52, 48, 61, 58, 67, 71, 69, 76, 82, 85, 79]
+    },
+    {
+      id: "training",
+      label: "Training Progress",
+      value: 78,
+      format: "number",
+      progress: {
+        label: "Current batch",
+        current: 78,
+        target: 100,
+        percentage: 78,
+        color: "bg-success"
+      }
+    },
+    {
+      id: "efficiency",
+      label: "Compute Efficiency",
+      value: 89.3,
+      format: "decimal",
+      suffix: "%",
+      highlight: true,
+      tooltip: "Percentage of optimal compute utilization"
+    }
+  ]
+  last_updated="2024-01-15T10:30:00Z"
+  data_source="AI Training Platform API"
+  refresh_interval="5 minutes"
+}}
+--> 

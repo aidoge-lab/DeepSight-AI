@@ -1,0 +1,267 @@
+/* Responsive Design - Media Queries and Mobile Adaptations */
+
+/* Tablet and below */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  /* Typography adjustments */
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+  
+  /* Grid system responsive */
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  /* Chart containers */
+  .chart-container {
+    padding: var(--spacing-md);
+  }
+  
+  .chart-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  
+  .chart-body {
+    min-height: 250px;
+  }
+  
+  /* Cards */
+  .card-header,
+  .card-body,
+  .card-footer {
+    padding: var(--spacing-md);
+  }
+  
+  /* Data tables */
+  .data-table {
+    font-size: 0.875rem;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: var(--spacing-sm);
+  }
+  
+  /* Button adjustments */
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .btn-group .btn {
+    width: auto;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 640px) {
+  :root {
+    --spacing-xs: 0.125rem;
+    --spacing-sm: 0.25rem;
+    --spacing-md: 0.75rem;
+    --spacing-lg: 1rem;
+    --spacing-xl: 1.5rem;
+    --spacing-2xl: 2rem;
+  }
+  
+  /* Typography further adjustments */
+  h1 {
+    font-size: 1.75rem;
+    line-height: 1.3;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+  
+  h3 {
+    font-size: 1.125rem;
+    line-height: 1.4;
+  }
+  
+  /* Chart containers mobile */
+  .chart-container {
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .chart-body {
+    min-height: 200px;
+  }
+  
+  .chart-title {
+    font-size: 1rem;
+  }
+  
+  /* Cards mobile */
+  .card-header,
+  .card-body,
+  .card-footer {
+    padding: var(--spacing-sm);
+  }
+  
+  .card-title {
+    font-size: 1.125rem;
+  }
+  
+  /* Data tables mobile - horizontal scroll */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .data-table {
+    min-width: 600px;
+    font-size: 0.75rem;
+  }
+  
+  /* Form elements mobile */
+  .form-input,
+  .form-select {
+    font-size: 1rem; /* Prevent zoom on iOS */
+  }
+}
+
+/* Large tablets and small desktops */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Large desktops */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+  }
+  
+  /* Chart containers desktop enhancements */
+  .chart-container {
+    padding: var(--spacing-xl);
+  }
+  
+  .chart-body {
+    min-height: 400px;
+  }
+  
+  /* Cards desktop enhancements */
+  .card-header,
+  .card-body,
+  .card-footer {
+    padding: var(--spacing-xl);
+  }
+}
+
+/* Extra large screens */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1400px;
+  }
+  
+  /* Grid system for large screens */
+  .grid-cols-auto {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Enhanced visuals for retina displays */
+  .chart-container,
+  .card {
+    border-width: 0.5px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+  
+  .chart-container,
+  .card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+  
+  .btn {
+    display: none;
+  }
+  
+  .chart-body {
+    min-height: auto;
+  }
+  
+  /* Ensure proper contrast for printing */
+  body {
+    color: #000;
+    background: #fff;
+  }
+  
+  .text-muted {
+    color: #666 !important;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #ffffff;
+    --secondary-color: #e2e8f0;
+    --accent-color: #63b3ed;
+    --text-primary: #f7fafc;
+    --text-secondary: #e2e8f0;
+    --text-muted: #a0aec0;
+    --background-primary: #1a202c;
+    --background-secondary: #2d3748;
+    --background-card: #2d3748;
+    --border-color: #4a5568;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+  }
+  
+  .chart-container,
+  .card {
+    background-color: var(--background-card);
+  }
+  
+  .data-table th {
+    background-color: var(--background-secondary);
+  }
+  
+  .data-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+} 

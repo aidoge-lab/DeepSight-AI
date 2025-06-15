@@ -21,4 +21,6 @@ This structure will:
 - Maintain consistent design language
 - Streamline maintenance and updates
 
-Note: Do not generate README.md file
+Note: 
+- Do not generate README.md file 
+- Output Language: English.

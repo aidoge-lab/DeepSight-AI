@@ -1,0 +1,180 @@
+<!-- Chart Container Template -->
+<div class="chart-container" id="{{chart_id}}" data-chart-type="{{chart_type}}" role="img" aria-labelledby="{{chart_id}}-title" aria-describedby="{{chart_id}}-desc">
+  <!-- Chart Header -->
+  <div class="chart-header">
+    <div class="chart-title-section">
+      <h3 id="{{chart_id}}-title" class="chart-title">{{chart_title}}</h3>
+      {{#if chart_subtitle}}
+      <p class="chart-description" id="{{chart_id}}-desc">{{chart_subtitle}}</p>
+      {{/if}}
+    </div>
+    
+    <div class="chart-controls flex items-center space-x-sm">
+      <!-- View Toggle -->
+      {{#if show_view_toggle}}
+      <div class="view-toggle btn-group" role="group" aria-label="Chart view options">
+        <button 
+          class="btn btn-sm btn-secondary active" 
+          data-view="chart"
+          aria-pressed="true"
+          aria-label="Chart view"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 12L7 8L10 11L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button 
+          class="btn btn-sm btn-secondary" 
+          data-view="table"
+          aria-pressed="false"
+          aria-label="Table view"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <rect x="3" y="3" width="10" height="10" stroke="currentColor" stroke-width="2" fill="none"/>
+            <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+      {{/if}}
+      
+      <!-- Export Options -->
+      {{#if show_export}}
+      <div class="dropdown export-dropdown">
+        <button class="btn btn-sm btn-ghost dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 2v8M12 6l-4-4-4 4M2 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="sr-only md:not-sr-only ml-xs">Export</span>
+        </button>
+        <div class="dropdown-menu" role="menu">
+          <a href="#" class="dropdown-item" role="menuitem" data-export="png">Download PNG</a>
+          <a href="#" class="dropdown-item" role="menuitem" data-export="svg">Download SVG</a>
+          <a href="#" class="dropdown-item" role="menuitem" data-export="csv">Download CSV</a>
+          <a href="#" class="dropdown-item" role="menuitem" data-export="json">Download JSON</a>
+        </div>
+      </div>
+      {{/if}}
+      
+      <!-- Fullscreen Toggle -->
+      {{#if show_fullscreen}}
+      <button 
+        class="btn btn-sm btn-ghost fullscreen-toggle" 
+        aria-label="Toggle fullscreen"
+        data-fullscreen="false"
+      >
+        <svg class="expand-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 3h4M13 3h-4M3 13h4M13 13h-4M3 3v4M13 3v4M3 13v-4M13 13v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg class="collapse-icon hidden" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M7 7h-4M9 7h4M7 9h-4M9 9h4M7 7v-4M9 7v-4M7 9v4M9 9v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      {{/if}}
+    </div>
+  </div>
+  
+  <!-- Chart Body -->
+  <div class="chart-body" id="{{chart_id}}-body">
+    <!-- Chart View -->
+    <div class="chart-view" id="{{chart_id}}-chart" aria-hidden="false">
+      {{#if loading}}
+      <div class="chart-loading flex items-center justify-center">
+        <div class="loading-spinner mr-md"></div>
+        <span class="text-muted">Loading chart data...</span>
+      </div>
+      {{else if error}}
+      <div class="chart-error text-center p-lg">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" class="mx-auto mb-md text-muted" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+          <path d="M15 9l-6 6M9 9l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h4 class="text-lg font-semibold mb-sm">Unable to load chart</h4>
+        <p class="text-muted mb-md">{{error_message}}</p>
+        <button class="btn btn-primary retry-btn" data-chart-id="{{chart_id}}">
+          Retry
+        </button>
+      </div>
+      {{else if no_data}}
+      <div class="chart-no-data text-center p-lg">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" class="mx-auto mb-md text-muted" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+          <path d="M7 8h10M7 12h6M7 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h4 class="text-lg font-semibold mb-sm">No data available</h4>
+        <p class="text-muted">{{no_data_message}}</p>
+      </div>
+      {{else}}
+      <!-- Chart content will be inserted here by JavaScript -->
+      <div class="chart-content" data-chart-config="{{chart_config}}"></div>
+      {{/if}}
+    </div>
+    
+    <!-- Table View (hidden by default) -->
+    {{#if show_view_toggle}}
+    <div class="table-view hidden" id="{{chart_id}}-table" aria-hidden="true">
+      <div class="table-responsive">
+        <table class="data-table w-full" role="table">
+          <thead>
+            <!-- Table headers will be generated dynamically -->
+          </thead>
+          <tbody>
+            <!-- Table data will be generated dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+  
+  <!-- Chart Footer -->
+  {{#if chart_footer}}
+  <div class="chart-footer">
+    <div class="chart-notes">
+      {{#if data_source}}
+      <p class="text-xs text-muted">
+        <strong>Source:</strong> {{data_source}}
+      </p>
+      {{/if}}
+      
+      {{#if last_updated}}
+      <p class="text-xs text-muted">
+        <strong>Last updated:</strong> {{last_updated}}
+      </p>
+      {{/if}}
+      
+      {{#if chart_notes}}
+      <p class="text-xs text-muted mt-xs">
+        <strong>Note:</strong> {{chart_notes}}
+      </p>
+      {{/if}}
+    </div>
+    
+    {{#if show_permalink}}
+    <div class="chart-actions">
+      <button class="btn btn-sm btn-ghost permalink-btn" data-chart-id="{{chart_id}}" aria-label="Copy chart permalink">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M6.5 3.5a3 3 0 015 0l1.5 1.5a3 3 0 010 4.24L11.5 7.5M9.5 12.5a3 3 0 01-5 0L3 11a3 3 0 010-4.24L4.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="ml-xs">Share</span>
+      </button>
+    </div>
+    {{/if}}
+  </div>
+  {{/if}}
+</div>
+
+<!-- Chart JavaScript Template -->
+<script type="text/template" id="{{chart_id}}-config">
+{
+  "id": "{{chart_id}}",
+  "type": "{{chart_type}}",
+  "title": "{{chart_title}}",
+  "data": {{{chart_data}}},
+  "options": {{{chart_options}}},
+  "responsive": true,
+  "accessibility": {
+    "enabled": true,
+    "description": "{{chart_subtitle}}"
+  }
+}
+</script> 
