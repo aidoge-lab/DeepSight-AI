@@ -150,18 +150,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you encounter any issues or have questions:
 
-1. Check the [Issues](https://github.com/your-username/ai-insights-charts/issues) page
+1. Check the [Issues](https://github.com/aidoge-lab/ai-insights-charts/issues) page
 2. Review the database documentation in `db/README.md`
 3. Create a new issue with detailed information about your problem
 
 ## 🎯 Roadmap
 
-- [ ] Add more comprehensive test coverage
-- [ ] Implement database migration scripts
-- [ ] Add API endpoints for data access
-- [ ] Create data visualization tools
-- [ ] Add more AI model data sources
-
 ---
-
-**Note**: Replace `your-username` in the URLs above with your actual GitHub username. 
