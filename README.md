@@ -10,37 +10,16 @@ This project draws inspiration from Epoch AI's work, aiming to accumulate and su
 
 **AI Insights Charts** is an artificial intelligence model analysis and visualization project based on Epoch AI data. This project focuses on providing deep insights into AI model development trends through comprehensive data analysis and visualization.
 
+[Live Demo](https://aidoge-lab.github.io/)
+
+![AI Model Parameter Scale Evolution Chart](images/AI_Model_Parameter_Scale_Evolution_Chart.png)
+
 ## 📊 Data Sources
 
 - **956 Notable AI Models** from Epoch AI dataset (1950-2025)
 - **41 Comprehensive Dimensions** including parameters, training compute, publication dates, organizations, etc.
 - **SQLite Database** for efficient storage and querying
 - **Real-time Data Processing** with automated ETL pipeline
-
-## 🔍 Core Features
-
-### Model Scale Evolution Analysis
-- Track AI model parameter growth over time
-- Analyze computational requirements and trends
-- Identify breakthrough moments in AI development
-
-### Interactive Visualizations
-- **ECharts-powered** dynamic charts
-- **Logarithmic scaling** for parameter visualization
-- **Multi-dimensional** filtering and exploration
-- **Responsive design** for various screen sizes
-
-### Data Processing Pipeline
-- **CSV to SQL** conversion tools
-- **Automated data validation** and cleaning
-- **Optimized database** schema with indexes
-- **Query examples** for common analyses
-
-### AI-Assisted Development
-- Built using modern AI development tools (Cursor, etc.)
-- **Automated code formatting** with Black and isort
-- **Quality assurance** with Flake8
-- **CI/CD pipeline** for continuous integration
 
 ## 🚀 Getting Started
 
@@ -57,9 +36,6 @@ python setup_database.py
 
 ### Generate Insights Procedure
 TBD
-
-### View Visualizations
-Open `insights/model_size/index.html` in your browser
 
 ## 📁 Project Structure
 
