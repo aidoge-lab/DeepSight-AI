@@ -1,4 +1,4 @@
-# AI Insights Charts
+# DeepSight AI
 
 ![CI/CD Pipeline](https://github.com/aidoge-lab/ai-insights-charts/workflows/CI/CD%20Pipeline/badge.svg)
 ![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
@@ -8,7 +8,7 @@ This project draws inspiration from Epoch AI's work, aiming to accumulate and su
 
 ## 🎯 Project Overview
 
-**AI Insights Charts** is an artificial intelligence model analysis and visualization project based on Epoch AI data. This project focuses on providing deep insights into AI model development trends through comprehensive data analysis and visualization.
+**DeepSight AI** is an artificial intelligence model analysis and visualization project based on Epoch AI data. This project focuses on providing deep insights into AI model development trends through comprehensive data analysis and visualization.
 
 [Live Demo](https://aidoge-lab.github.io/)
 
@@ -40,7 +40,7 @@ TBD
 ## 📁 Project Structure
 
 ```
-ai-insights-charts/
+DeepSight-AI/
 ├── data/models/          # Raw data and conversion scripts
 ├── db/                   # SQLite database and utilities
 ├── insights/             # Analysis modules and visualizations
