@@ -11,7 +11,7 @@ I want to extract comprehensive model insights:
   - Y-axis scale: Logarithmic (log10) to handle the wide range of parameter sizes
   - domain as series differentiation (The primary domain(s) the model is designed for)
 
-folder_name=insights/model_size
+folder_name=insights/model_parameters_by_years
 Implementation approach divided into four stages:
 
 ## Stage 1.a: SQL Query Generation

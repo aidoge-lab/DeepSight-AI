@@ -6,12 +6,17 @@
 ## Insight Mining Requirements
 I want to extract comprehensive model insights:
 - Analyze all AI models with a scatter plot where:
-  - X-axis: Model release year
-  - Y-axis: Model parameter count (trainable parameters) 
+  - X-axis: Model parameter count (trainable parameters)
+  - X-axis scale: Logarithmic (log10) to handle the wide range of parameter sizes
+  - Y-axis: Model training_dataset_size_datapoints
   - Y-axis scale: Logarithmic (log10) to handle the wide range of parameter sizes
   - domain as series differentiation (The primary domain(s) the model is designed for)
 
-folder_name=insights/model_size
+folder_name=insights/model_parameters_vs_datapoints
+
+Note: All output files in any step should use English
+Note: Do not write README file at any time
+
 Implementation approach divided into four stages:
 
 ## Stage 1.a: SQL Query Generation
@@ -27,7 +32,8 @@ Output to `$folder_name/stat.sql`
 Create an python script to execute the sql and save it as `$folder_name/extract.py`
 This Python program takes a database path as input, two sql files as input.
 The output file:
-- the first file named `$folder_name/data.json` is a JSON format data containing the SQL execution result. This JSON format needs to be directly compatible with the echarts data format.
+- the first file named `$folder_name/data.json` is a JSON format data containing the SQL execution result. 
+  This JSON format needs to be directly compatible with the echarts data format.
 - the second file named `$folder_name/stat.json` is a JSON format data containing the SQL execution result.
 
 
@@ -35,4 +41,5 @@ The output file:
 Based on the files output from the above steps, please generate ECharts format data script + simple HTML that can be directly opened and run locally through a simple HTTP server.
 Reference this webpage design: https://echarts.apache.org/examples/zh/editor.html?c=scatter-painter-choice
 Output `$folder_name/index.html`
-
+- X-axis(log10) scales with increments of 10x per tick
+- Y-axis(log10) scales with increments of 10x per tick
