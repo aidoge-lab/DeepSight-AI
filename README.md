@@ -12,7 +12,7 @@ This project draws inspiration from Epoch AI's work, aiming to accumulate and su
 
 [Live Demo](https://aidoge-lab.github.io/)
 
-![AI Model Parameter Scale Evolution Chart](images/model_parameters_by_years.png)
+![AI Model Parameter Scale Evolution Chart](insights/images/model_parameters_by_years.png)
 
 ## 📊 Data Sources
 
